@@ -22,6 +22,8 @@ if [[ "$1" = 'runserver' ]]; then
     args+=('--reload')
     printf " * Mode:\tDevelopment\n"
   else
+    cpuCount=$(nproc --all)
+    args+=('--workers' $(( $cpuCount * 2 + 1 )) '--no-access-log')
     printf " * Mode:\tProduction\n"
   fi
 
